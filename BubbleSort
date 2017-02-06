@@ -1,0 +1,87 @@
+
+import java.util.Arrays;
+import java.util.Scanner;
+
+public class Main {
+	public static void main(String[] args) {
+		int initialArray[]=yourNumberList();
+		int yourChoice=ascDescWhich();
+		if(yourChoice == 1){
+			bubbleSortAscending(initialArray);
+		}else if(yourChoice == 2){
+			bubbleSortDescending(initialArray);
+		}else{
+			System.err.println("ERROR:  type 1 for ascending, type 2 for descending.");
+		}
+	}
+	
+	
+	public static int[] yourNumberList(){					//set your own array
+		System.out.println("How many slots do you want?");
+		Scanner scan=new Scanner(System.in);
+		int numOfSlots=scan.nextInt();
+		int[]myNumList=new int[numOfSlots];
+		for(int i=0;i<numOfSlots;i++){					//saving each slots
+			System.out.print("Type slot"+i+": ");
+			myNumList[i]=scan.nextInt();
+			if(i==(numOfSlots-1)){						//last iteration shows whole entered numbers
+				for(int j=0;j<myNumList.length;j++){
+					if(j==0){
+						System.out.print("Before Sort: ["+myNumList[j]+",");
+					}else if(j==myNumList.length-1){
+						System.out.println(myNumList[j]+"]");
+					}else{
+						System.out.print(myNumList[j]+",");
+					}					
+				}
+			}			
+		}
+		return myNumList;
+	}
+	
+	
+	
+	public static int ascDescWhich(){					//Choose Ascending or Descending
+		System.out.println("Ascending(low to high)<Press 1>? or Descending(High to low)<Press 2>?");
+		Scanner scan=new Scanner(System.in);
+		int yourChoice=scan.nextInt();
+		return yourChoice;
+	}
+	
+	
+	
+	public static void bubbleSortAscending(int[]beforeSort){	//bubbleSort Ascending ver.
+		int temp;
+		for(int i=0;i<beforeSort.length-1;i++){
+			for(int j=1;j<beforeSort.length-i;j++){
+				if(beforeSort[j-1]>beforeSort[j]){
+					temp=beforeSort[j-1];			//deep copy
+					beforeSort[j-1]=beforeSort[j];
+					beforeSort[j]=temp;
+				}
+			}
+			System.out.println("Iteration "+i+": "+Arrays.toString(beforeSort));
+		}
+		System.out.println("**Final Result :"+Arrays.toString(beforeSort));
+	}
+	
+	
+	
+	
+	public static void bubbleSortDescending(int[]beforeSort){	//bubbleSort Descending ver.
+		int temp;
+		for(int i=0;i<beforeSort.length-1;i++){
+			for(int j=1;j<beforeSort.length-i;j++){
+				if(beforeSort[j-1]<beforeSort[j]){
+					temp=beforeSort[j-1];			//deep copy
+					beforeSort[j-1]=beforeSort[j];
+					beforeSort[j]=temp;
+				}
+			}
+			System.out.println("Iteration "+i+": "+Arrays.toString(beforeSort));
+		}
+		System.out.println("**Final Result :"+Arrays.toString(beforeSort));	
+	}
+	
+
+}
